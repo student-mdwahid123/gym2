@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Best Gym in City. Join FitLife Gym for bodybuilding, cardio, and fitness training.">
+    <title>FitLife Gym - Complete Fitness Solution</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <nav class="navbar">
+        <div class="logo">Fit<span>Life</span></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#bmi">BMI</a></li>
+            <li><a href="#booking" style="color: var(--primary-color);">Book Class</a></li> <!-- New Link -->
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h3>Build Your Body Strong</h3>
+            <h1>Be <span>Strong</span> Training Hard</h1>
+            <p>Push your limits and achieve your fitness goals with our professional trainers.</p>
+            <a href="#booking" class="btn">Join Now</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-img" data-aos="fade-right">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Gym Trainer">
+        </div>
+        <div class="about-text" data-aos="fade-left">
+            <h2>Why Choose Us?</h2>
+            <p>We provide world-class equipment and certified trainers to help you succeed.</p>
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-dumbbell"></i>
+                    <h4>Modern Equipment</h4>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-heartbeat"></i>
+                    <h4>Healthy Plan</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="service-container">
+            <div class="service-box" data-aos="zoom-in">
+                <i class="fas fa-running"></i>
+                <h3>Cardio</h3>
+                <p>Improve your heart health with our intense cardio sessions.</p>
+            </div>
+            <div class="service-box" data-aos="zoom-in" data-aos-delay="100">
+                <i class="fas fa-dumbbell"></i>
+                <h3>Weight Lifting</h3>
+                <p>Build muscle and strength with professional guidance.</p>
+            </div>
+            <div class="service-box" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fas fa-om"></i>
+                <h3>Yoga</h3>
+                <p>Relax your mind and body with our yoga classes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BMI Calculator Section -->
+    <section id="bmi" class="bmi-section">
+        <h2 class="section-title">Calculate Your BMI</h2>
+        <div class="bmi-container" data-aos="flip-up">
+            <div class="input-group">
+                <input type="number" id="weight" placeholder="Weight (kg)">
+                <input type="number" id="height" placeholder="Height (cm)">
+            </div>
+            <button onclick="calculateBMI()" class="btn">Calculate</button>
+            <div id="bmiResult" class="result-text"></div>
+        </div>
+    </section>
+
+    <!-- NEW FEATURE: Booking Section with Local Storage -->
+    <section id="booking" class="booking-section">
+        <h2 class="section-title">Manage Your Classes</h2>
+        <div class="booking-wrapper" data-aos="fade-up">
+            
+            <!-- Form -->
+            <div class="booking-form">
+                <h3>Book a Slot</h3>
+                <form id="gymForm">
+                    <input type="hidden" id="editIndex"> <!-- For Editing -->
+                    
+                    <div class="input-box">
+                        <label>Full Name</label>
+                        <input type="text" id="userName" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="input-box">
+                        <label>Select Class</label>
+                        <select id="classType" required>
+                            <option value="" disabled selected>Select Option</option>
+                            <option value="Body Building">Body Building</option>
+                            <option value="Cardio">Cardio</option>
+                            <option value="Yoga">Yoga</option>
+                            <option value="Zumba">Zumba</option>
+                            <option value="CrossFit">CrossFit</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-box">
+                        <label>Date</label>
+                        <input type="date" id="classDate" required>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="submitBtn">Book Now</button>
+                </form>
+            </div>
+
+            <!-- List/Table -->
+            <div class="booking-list">
+                <h3>Your Schedule</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Class</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingTableBody">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                    <p id="noBookingMsg" style="text-align:center; margin-top:15px; color:#888;">No bookings found yet.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2023 FitLife Gym. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script/main.js"></script>
+</body>
+</html>
